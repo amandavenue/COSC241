@@ -1,0 +1,133 @@
+public static boolean rowLengthsDecrease(int [] []t){
+    if (t.length == 0){
+        return false;
+    }
+    for (int r = 0; r <t.length; r++){
+        if (!(t[r].length <= t[r-1].length)){
+            return false;
+        }
+    }
+    return true;
+}
+
+public static boolean rowValuesDecrease(int [] [] t){
+    if (t.length == 0){
+        return false;
+    }
+    for (inr r = 0; r < t.length; r++){
+        for (int c = 0; c < t[r].length; c++){
+            if (!(t[r][c] > t[r][c-1])){
+                return false;
+            }
+        }
+    }
+    return true;
+}
+
+public static boolean columnValuesIncrease(int [] [] t){
+    for (int r = 0; r < t.length; r++){
+        for (int c = 0; c < t[r].length; c++){
+            if (!(t[r][c] > t[r-1][c])){
+                return false;
+            }
+        }
+    }
+    return true;
+}
+
+public static boolean isSetOf1ToN(int [] [] t){
+    int cells = 0;
+    boolean[] set;
+    for (int r = 0; r < t.length; r++){
+        cells += t[r].length;
+    }
+    set = new boolean[cells];
+    for (int r = 0; r <t.length; r++){
+        for (int c = 0; c < t[r].length; c++){
+            if (t[r][c] > cells){
+                return false;
+            } else {
+                set[(t[r][c])-1] = true;
+            }
+        }
+    }
+
+    for (int i = 0; i < set.length; i++){
+        if (!set[i]){
+            return false;
+        }
+    }
+    return true;
+}
+
+protected Integer addToRow(Cell curr, int value){
+    for (Cell c = curr; c != null; c = c.right){
+        if (c.value > value){
+            int t = c.value;
+            c.value = value;
+            return t;
+        }
+        if (c.right == null){
+            Cell end = new Cell(value);
+            c.right = end;
+            end.left = c;
+            if (c.above != null){
+                end.above = c.above.right;
+                end.above.below = end;
+            }
+            if (c.below != null){
+                end.below = c.below.right;
+                if (end.below != null){
+                    end.below.above = end;
+                }
+            }
+            return null;
+        }
+    }
+    return null;
+}
+
+public void addValue(Integer value){
+    if (smallest == null){
+        smallest = new Cell(value);
+        return;
+    }
+    Interger v = value;
+    for (Cell r = smallest;;r = r.below){
+        v = addToRow(r,v);
+        if (v == null){
+            return;
+        }
+        if (r.below == null){
+            Cell next = new Cell(v);
+            r.below = next;
+            next.above = r;
+            return;
+        }
+    }
+}
+
+public int size(){
+    if (rootValue == null){
+        return 0;
+    }
+    int s = 1;
+    for (Tree<T> child:children){
+        s += child.size();
+    }
+    return s;
+}
+
+public int maxDegree(){
+    int max = children.size();
+    if (children.isEmpty()){
+        return 0;
+    }
+    for (Tree<T> child; children){
+        if (child.maxDegree() > max){
+            max = child.maxDegree();
+        }
+    }
+    return max;
+}
+

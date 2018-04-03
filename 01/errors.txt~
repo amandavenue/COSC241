@@ -1,0 +1,59 @@
+1. class hi is public, should be declared in a file named hi.java
+public class hi{
+
+Error because the name of the class does not match the file name
+
+2. hello, World!
+
+No error, just lower case h printed when java file is excecuted
+
+3.Hi.java:3: error: ')' expected
+System.out.println(hello, World!");
+^
+Hi.java:3: error: unclosed string literal
+System.out.println(hello, World!");
+^
+Hi.java:3: error: ';' expected
+System.out.println(hello, World!");
+^
+Hi.java:5: error: reached end of file while parsing
+}
+
+Four errors produced. All could be corrected by fixing the unclosed string error
+
+4. Hi.java:3: error: unclosed string literal
+System.out.println("hello, World!);
+^
+Hi.java:3: error: ';' expected
+System.out.println("hello, World!);
+^
+Hi.java:5: error: reached end of file while parsing
+}
+^
+3 errors
+
+3 errors produced. All coul dbe corrected by fixing the unclosed string error
+
+5.Error: Main method not found in class Hi, please define the main method as:
+public static void main(String[] args)
+or a JavaFX application class must extend javafx.application.Application
+
+File will cpmile but this error is printed when the file tries to excecute
+
+6.Hi.java:3: error: cannot find symbol
+System.out.printline("hello, World!");
+^
+symbol:   method printline(String)
+location: variable out of type PrintStream
+1 error
+
+One error produced because method printline is not a real thing
+
+7. Hi.java:3: error: ';' expected
+System.out.println("hello, World!")
+^
+1 error
+
+one error produced when compiling
+
+8. 

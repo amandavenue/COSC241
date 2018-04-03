@@ -1,0 +1,51 @@
+package week02;
+
+public class Coins{
+
+    public static void main(String [] args){
+        boolean [] b = {HEADS, TAILS, HEADS, HEADS, TAILS};
+        Coins c = new Coins(b);
+        System.out.println (c.countHeads());
+    }	
+
+    public static final boolean HEADS = true;
+    public static final boolean TAILS = false;
+	
+    private boolean[] coins;
+	
+    public Coins(boolean[] coins) {
+        this.coins = coins;
+    }
+
+    public int countHeads(){
+        int h = 0;
+        for (boolean c: coins){
+            if (c == true){
+                h++;
+            }
+        }
+        return h;
+    }
+
+    public String toString(){
+        String tosses = "";
+        for (boolean c: coins){
+            if (c == true){
+                tosses += "H";
+            } else {
+                tosses += "T";
+            }
+        }
+        return tosses;
+    }
+
+    public Coins(String c){
+        Coins cs = new Coins("HHTHHHTTT");
+    }
+
+    public Coins(int length){
+        
+        
+    
+
+}

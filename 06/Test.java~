@@ -1,0 +1,115 @@
+package week06;
+
+import java.util.*;
+import java.io.*;
+
+public class Test{
+
+    public static void main (String [] args){
+        System.out.println(first());
+        System.out.println(getLines());
+        System.out.println(scan());
+        //System.out.println(firstLet());
+        System.out.println(nextWord(10));
+
+    }
+
+    /** sets the random variable so that it is same through out.
+     */
+    private static Random random;
+
+    /** initialises firstLetter variable.
+     */
+    private static String firstLetter;
+
+    /** initialises the array of strings nextLetters.
+     */
+    private static String[] nextLetters = new String[getLines()];
+
+    /** 241-check uses this method to generate a random from a seed.
+        @param r is the seed for the random sequence.
+    */
+    public Test(Random r) {
+        random = r;
+    }
+
+    /** assigns the txt from first-letters.tct to the firstLetters String.
+        @return firstLetters string
+    */
+    public static String first(){
+        try{
+            Scanner sc = new Scanner (new File("first-letters.txt"));
+            firstLetter = sc.nextLine();
+        } catch (FileNotFoundException e){
+            System.out.println("File not found");
+        }
+        return firstLetter;
+    }
+
+    /** count the number of lines in the continuations file.
+        @return count so the length of nextLetters[] can be set
+    */
+    public static int getLines(){
+        int count = 0;
+        try{
+            Scanner sc = new Scanner(new File("continuations.txt"));
+            while (sc.hasNextLine()){
+                count ++;
+                sc.nextLine();
+            }
+        } catch (FileNotFoundException e){
+            System.out.println("File not found");
+        }
+        return count;
+    }
+
+    /**scans a file with letter continuations to make an array of strings.
+       @return the array of strings
+    */
+    public static String[] scan(){
+        try{
+            Scanner sc = new Scanner(new File("continuations.txt"));
+            while(sc.hasNextLine()){
+                for (int i = 0; i < nextLetters.length; i++){
+                    nextLetters[i] = sc.nextLine();
+                }
+            }
+        } catch (FileNotFoundException e){
+            System.out.println("File not found");
+        }
+        return nextLetters;
+    }
+
+    /** works out a random index for the first letter to be calculated from.
+        @return char to be the first letter
+    */
+    //public static char firstLet (){
+    //int r = random.nextInt(firstLetter.length());
+    //return firstLetter.charAt(random.nextInt(firstLetter.length()));
+    // }  
+        
+    /** builds a random gramatically plausable word.
+        @param length is the length of the desired word
+        @return the randomly generated word
+    */
+    public static String nextWord(int length) {
+        StringBuilder result = new StringBuilder();
+        char f = firstLetter.charAt(random.nextInt());
+        firstLetter = first();
+        nextLetters = scan();
+        String res = "";
+        for (int i = 0; i < length; i++){
+            if (i == 0){
+                result.append(f);
+                res += (f);
+            } else {
+                int m = random.nextInt((nextLetters[f-1]).length());
+                result.append((nextLetters[f-1]).charAt(m));
+                res += ((nextLetters[f-1]).charAt(m));
+            }
+        }
+        //return result.toString();
+        return res;
+    }
+
+}

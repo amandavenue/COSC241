@@ -1,0 +1,14 @@
+topdir
+├── adir
+│   └── hello.txt
+├── bdir
+│   ├── ddir
+│   └── edir
+│       └── fdir
+│           ├── gdir
+│           ├── goodbye.txt
+│           └── hello.txt
+└── cdir
+    └── goodbye.txt
+
+7 directories, 4 files
